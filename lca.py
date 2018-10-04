@@ -2,8 +2,10 @@ class Node:
     # Constructor to create a new binary node
     def __init__(self, val):
         self.val =  val
-        self.left = None
-        self.right = None
+        # self.children[0] = None
+        # self.children[1] = None
+        self.children = []
+        #graph is no longer binary tree so could have more than two children
 
 def lowestCommonAncestor(root, x, y):
 
@@ -37,10 +39,14 @@ def findPath( root, path, k):
     if root.val == k :
         return True
 
-    # Check if k is found in left or right sub-tree
-    if ((root.left != None and findPath(root.left, path, k)) or
-            (root.right!= None and findPath(root.right, path, k))):
-        return True
+    # check if there are subtrees
+    if (len(root.children)>=1):
+        pass
+        # Check if k is found in left or right sub-tree
+        if ((root.children[0] != None and findPath(root.children[0], path, k))):
+            return True
+        elseif(( len(root.children) >= 2) and root.children[1]!= None and findPath(root.children[1], path, k)):
+            return True
 
     # If not present in subtree rooted with root, remove
     # root from path and return False
